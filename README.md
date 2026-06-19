@@ -1,6 +1,33 @@
 # EV Charging Deserts
 
-A small project that identifies high-priority highway corridors lacking DC Fast Charge infrastructure and writes the top 100 candidate locations to `top_100_charging_deserts.csv`.
+# EV Charging Desert Discovery & Scoring Engine
+
+A geospatial analysis tool built in Node.js to locate, evaluate, and rank optimal investment sites for commercial EV DC Fast Charging (DCFC) infrastructure across the United States. 
+
+The engine cross-references real-time operational station data from the National Laboratory of the Rockies (NLR / AFDC) API against core transportation corridors to isolate geographic gaps and rank them by investment viability.
+
+---
+
+## Features
+
+* **Live Infrastructure Ingestion:** Natively queries active public DC Fast Chargers using the live NLR developer endpoints.
+* **Geospatial Proximity Extraction:** Leverages `@turf/turf` to run spatial exclusion buffers (35-mile radii) around existing chargers, isolating true infrastructure deserts.
+* **Priority Matrix Scoring:** Evaluates gaps using a multi-variable investment optimization formula.
+* **On-Demand Location Underwriting:** Features an interactive engine that dynamically scores any arbitrary latitude and longitude pair on a 0.0 to 10.0 scale.
+
+---
+
+## The Algorithmic Scoring Framework
+
+Sites that pass the initial geographic exclusion filter are prioritized using the following weighted matrix:
+
+$$\text{Score} = \alpha \cdot (\text{Traffic Volume}) + \beta \cdot (\text{Distance to Nearest DCFC}) - \gamma \cdot (\text{Grid Sparsity Penalty})$$
+
+* **$\alpha$ (Traffic Weight):** Prioritizes corridors with high Annual Average Daily Traffic (AADT).
+* **$\beta$ (Distance Weight):** Rewards sites further away from existing charging clusters to prevent market saturation.
+* **$\gamma$ (Grid Sparsity Penalty):** Penalizes deep rural locations with constrained utility capacity where grid tie-in costs (transformers, substations) reduce project ROI.
+
+---
 
 ## What it does
 
