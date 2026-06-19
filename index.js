@@ -1,14 +1,15 @@
 /**
  * EV Charging Desert Discovery & Scoring Engine
  * * Required Dependencies:
- * npm install @turf/turf
+ * npm install @turf/turf dotenv
  * * Note: Uses native fetch (Node.js 18+ required).
  */
+require('dotenv').config();
 const fs = require('fs');
 const turf = require('@turf/turf');
 
 // Configuration
-const API_KEY = 'DEMO_KEY'; // Get a free key at developer.nlr.gov
+const API_KEY = process.env.API_KEY || 'DEMO_KEY'; // Get a free key at developer.nlr.gov
 // Note: NREL transitioned to NLR in May 2026. The nrel.gov endpoints are dead.
 const API_URL = `https://developer.nlr.gov/api/alt-fuel-stations/v1.json?api_key=${API_KEY}&access=public&status=E&fuel_type=ELEC&ev_connector_types=DC_FAST`;
 

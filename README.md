@@ -50,13 +50,21 @@ npm install
 
 ## Configure
 
-1. In `index.js`, set `API_KEY` to a valid NLR API key:
+1. Copy `.env_sample` to `.env`:
 
-```js
-const API_KEY = 'DEMO_KEY';
+```bash
+cp .env_sample .env
 ```
 
-2. If needed, update the `API_URL` endpoint or fuel filter parameters.
+2. Edit `.env` and add your NLR API key:
+
+```
+API_KEY=your_actual_nlr_api_key_here
+```
+
+Get a free API key at [developer.nlr.gov](https://developer.nlr.gov).
+
+3. (Optional) If needed, update the `API_URL` endpoint or fuel filter parameters in `index.js`.
 
 ## Run
 
@@ -83,9 +91,10 @@ This will:
 
 ## Notes
 
-- The project uses `@turf/turf` for spatial calculations.
+- The project uses `@turf/turf` for spatial calculations and `dotenv` to load environment variables.
 - The current highway network is synthetic and intended for prototyping only.
 - The scoring engine is a simple heuristic and can be adapted with real traffic, grid, and demand data.
+- **Never commit `.env` to version control** — it contains sensitive API keys. The `.env_sample` file is safe to commit as a template.
 
 ## License
 
